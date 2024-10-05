@@ -1,4 +1,4 @@
 {
-    "livePreview.defaultPreviewPath": "/part2/public/index.html",
-    "git.ignoreLimitWarning": true
+  "livePreview.defaultPreviewPath": "/part2/public/index.html",
+  "git.ignoreLimitWarning": true
 }
