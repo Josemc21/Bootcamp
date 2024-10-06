@@ -4,6 +4,7 @@ import Notification from './components/Notification'
 import noteService from './services/notes'
 import loginService from './services/login'
 import LoginForm from './components/LoginForm'
+import NoteForm from './components/NoteForm'
 
 const App = () => {
   const [notes, setNotes] = useState([])
@@ -94,40 +95,27 @@ const App = () => {
 
   const notesToShow = showAll ? notes : notes.filter((note) => note.important)
 
-  const renderCreateNoteForm = () => (
-    <>
-      <form onSubmit={addNote}>
-        <input
-          placeholder='Write your note content'
-          value={newNote}
-          onChange={handleNoteChange}
-        />
-        <button type='submit'>save</button>
-      </form>
-      <div>
-        <button onClick={handleLogout}>Cerrar sesión</button>
-      </div>
-    </>
-  )
-
   return (
     <div>
       <h1>Notes</h1>
       <Notification message={errorMessage} />
-      {user ? (
-        renderCreateNoteForm()
-      ) : (
-        <LoginForm
-          username={username}
-          password={password}
-          handleUsernameChange={({ target }) => setUsername(target.value)}
-          handlePasswordChange={({ target }) => setPassword(target.value)}
-          handleSubmit={handleLogin}
-        />
-      )}
+      {user
+        ? <NoteForm
+            handleSubmit={addNote}
+            newNote={newNote}
+            handleNoteChange={handleNoteChange}
+            handleLogout={handleLogout}
+          />
+        : <LoginForm
+            username={username}
+            password={password}
+            handleUsernameChange={({ target }) => setUsername(target.value)}
+            handlePasswordChange={({ target }) => setPassword(target.value)}
+            handleSubmit={handleLogin}
+          />}
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all'}
+          Show {showAll ? 'important' : 'all'}
         </button>
       </div>
       <ul>
