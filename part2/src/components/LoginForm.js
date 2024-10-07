@@ -1,16 +1,37 @@
 import Togglable from './Togglable'
+import loginService from '../services/login'
+import { useState } from 'react'
 
-export default function LoginForm ({ handleSubmit, username, password, handleUsernameChange, handlePasswordChange }) {
+export default function LoginForm ({ handleSubmit }) {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    try {
+      const user = await loginService.login({
+        username,
+        password
+      })
+
+      handleSubmit(user)
+      setUsername('')
+      setPassword('')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <Togglable buttonLabel='Show login'>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         <div>
           <input
             type='text'
             value={username}
             name='Username'
             placeholder='Username'
-            onChange={handleUsernameChange}
+            onChange={({ target }) => setUsername(target.value)}
           />
         </div>
         <div>
@@ -19,7 +40,7 @@ export default function LoginForm ({ handleSubmit, username, password, handleUse
             value={password}
             name='Password'
             placeholder='Password'
-            onChange={handlePasswordChange}
+            onChange={({ target }) => setPassword(target.value)}
           />
         </div>
         <button>Login</button>
