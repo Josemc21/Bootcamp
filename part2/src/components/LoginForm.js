@@ -1,6 +1,7 @@
 import Togglable from './Togglable'
 import loginService from '../services/login'
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 
 export default function LoginForm ({ handleSubmit }) {
   const [username, setUsername] = useState('')
@@ -47,4 +48,8 @@ export default function LoginForm ({ handleSubmit }) {
       </form>
     </Togglable>
   )
+}
+
+LoginForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired
 }
