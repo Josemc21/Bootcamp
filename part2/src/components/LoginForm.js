@@ -2,10 +2,12 @@ import Togglable from './Togglable'
 import loginService from '../services/login'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import Notification from './Notification'
 
 export default function LoginForm ({ handleSubmit }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -20,11 +22,16 @@ export default function LoginForm ({ handleSubmit }) {
       setPassword('')
     } catch (error) {
       console.error(error)
+      setErrorMessage('Wrong credentials')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
     }
   }
 
   return (
     <Togglable buttonLabel='Show login'>
+      <Notification message={errorMessage} />
       <form onSubmit={handleLogin}>
         <div>
           <input
