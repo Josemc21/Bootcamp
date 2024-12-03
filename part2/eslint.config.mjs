@@ -18,7 +18,8 @@ export default [
       indent: ['error', 2],                // Indentación de 2 espacios
       quotes: ['error', 'single'],         // Usar comillas simples
       semi: ['error', 'never'],            // No requiere punto y coma
-      'no-unused-vars': ['warn']          // Avisa sobre variables no usadas
+      'no-unused-vars': ['warn'],          // Avisa sobre variables no usadas
+      'no-anonymous-default-export': 'off',
     },
     extends: [
       'eslint:recommended',
