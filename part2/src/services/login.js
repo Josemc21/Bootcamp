@@ -6,5 +6,5 @@ const login = async (credentials) => {
   const { data } = await axios.post(baseUrl, credentials)
   return data
 }
-
+// eslint-disable-next-line
 export default { login }

@@ -51,7 +51,7 @@ export default function LoginForm ({ handleSubmit }) {
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button>Login</button>
+        <button id='form-login-button'>Login</button>
       </form>
     </Togglable>
   )

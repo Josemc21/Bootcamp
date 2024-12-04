@@ -15,7 +15,7 @@ export default function NoteForm ({ addNote, handleLogout }) {
 
       const noteObject = {
         content: newNote,
-        important: Math.random() > 0.5
+        important: false
       }
 
       if (noteObject.content !== '') {
@@ -34,6 +34,7 @@ export default function NoteForm ({ addNote, handleLogout }) {
 
       <form onSubmit={handleSubmit}>
         <input
+          data-test-id='new-note-input'
           placeholder='Write your note content'
           value={newNote}
           onChange={handleChange}
